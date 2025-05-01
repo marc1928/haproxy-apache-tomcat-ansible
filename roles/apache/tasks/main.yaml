@@ -29,4 +29,10 @@
   loop: "{{ site }}"
   tags: config, website 
 
-- 
+- name: Configuration des ports d'écoute de apache 
+  template: 
+    src: templates/ports.conf.j2
+    dest: /etc/apache2/ports.conf
+  tags: manage, ports 
+
+#- name: activer les sites

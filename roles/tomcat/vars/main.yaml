@@ -1,0 +1,4 @@
+# variable du fichier server.xml
+shutdown_port: 8005
+http_port: 8080
+ajp_port: 8009

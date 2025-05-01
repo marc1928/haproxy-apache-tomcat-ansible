@@ -33,7 +33,11 @@ site:
     confname: mysite3
     loglevel: war    
 
-
+# Variable pour le fichier de configuartion des ports 
+listen_ports:
+  - 80
+  - 88
+  - 82
   
 
 

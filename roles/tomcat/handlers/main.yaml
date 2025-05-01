@@ -1,0 +1,5 @@
+---
+- name: redemarrer tomcat
+  service:
+    name: tomcat
+    state: restarted
