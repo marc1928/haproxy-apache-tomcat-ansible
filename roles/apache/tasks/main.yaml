@@ -1,0 +1,32 @@
+---
+# Creation des siten web
+- name: Création des répertoires pour les sites web 
+  file: 
+    name: "/var/www/{{ item.directory }}"
+    state: directory
+    mode: '0755'
+  loop: "{{ site }}"
+  tags: ceate, directory
+
+- name: crétion des index.html
+  template:
+    src: "templates/index.html.j2"
+    dest: "/var/www/{{ item.directory }}/index.html"
+  loop: "{{ site }}"
+  tags: create, index
+
+- name: Copie picture 
+  copy:
+    src: files/download.png
+    dest: "/var/www/{{ item.directory }}/download.png"
+  loop: "{{ site }}"
+  tags: create, index
+
+- name: Configuration de chaque site 
+  template:
+    src: templates/mysite.conf.j2
+    dest: "/etc/apache2/sites-available/{{ item.confname }}.conf"
+  loop: "{{ site }}"
+  tags: config, website 
+
+- 

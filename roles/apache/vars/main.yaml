@@ -1,0 +1,40 @@
+# variable pour la création du site 
+site:
+  - name: site1 
+    port: 80 
+    servername: wwww.mysite1.org
+    serveradmin: webmaster@site1.org
+    directory: site1
+    h1_balise: Mon site 1
+    errorlog: /var/www/site1/logs/error.log
+    customlog: /var/www/site1/logs/access.log
+    confname: mysite1
+    loglevel: war
+
+  - name: site2  
+    port: 88
+    servername: wwww.mysite2.org
+    serveradmin: webmaster@site2.org  
+    directory: site2
+    h1_balise: Mon site2
+    errorlog: /var/www/site2/logs/error.log
+    customlog: /var/www/site2/logs/access.log
+    confname: mysite2
+    loglevel: war
+
+  - name: site3 
+    port: 82 
+    servername: wwww.mysite3.org
+    serveradmin: webmaster@site3.org    
+    directory: site3 
+    h1_balise: Mon site 3
+    errorlog: /var/www/site3/logs/error.log
+    customlog: /var/www/site3/logs/access.log
+    confname: mysite3
+    loglevel: war    
+
+
+  
+
+
+

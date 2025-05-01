@@ -1,0 +1,12 @@
+---
+- name: Configuration de apache, tomcat et de haproxy 
+  hosts: tomcat
+  become: true
+
+  roles:
+    - role: apache
+      tags: ['apache','webserver'] 
+    - role: tomcat 
+      tags: ['tomcat','appserver'] 
+    - role: haproxy 
+      tags: ['haproxy', 'loadbalancer']                      

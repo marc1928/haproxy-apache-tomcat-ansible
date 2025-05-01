@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>efi-cours</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .navbar {
+            background-color: #87CEEB; /* Sky blue color */
+            overflow: hidden;
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+        .navbar a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: calc(100vh - 50px); /* Adjusted for navbar height */
+            padding-top: 20px;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+            margin-top: 30px; /* Adjust the margin to move the title higher */
+        }
+        img, .gif {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background-color: #87CEEB; /* Sky blue color */
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+    </div>
+    <div class="container">
+        <h1> "{{ item.h1_balise }}" </h1>
+
+        <div class="gif">
+            <img src="download.png" alt="gift devops">
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2025 become expert DevOps. By Marc Bassi.</p>
+    </footer>
+</body>
+</html>

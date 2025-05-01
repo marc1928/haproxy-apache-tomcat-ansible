@@ -1,0 +1,13 @@
+all:
+  children:
+    tomcat:
+      hosts:
+        debian.cible1:   
+
+    haproxy: 
+      hosts:
+        haproxy: 
+
+    local:
+      hosts:
+        localhost:
