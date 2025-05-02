@@ -1,0 +1,19 @@
+ip_front: "*"
+port_front: 80
+mode_front: http
+
+acls:
+# acl for apache
+  - acl: asite1_acl hdr_dom(host) -i www.mysite1.org
+    usebackend: site1-backend if asite1_acl
+  - acl: asite2_acl hdr_dom(host) -i www.mysite2.org
+    usebackend: site2-backend if asite2_acl
+  - acl: asite3_acl hdr_dom(host) -i www.mysite3.org
+    usebackend: site3-backend if asite3_acl
+# acl for tomcat
+  - acl: instance1_acl path_dir -i /webapp
+    usebackend: tomcat1-backend if instance1_acl
+  - acl: instance2_acl path_dir -i /sample
+    usebackend: tomcat2-backend if instance2_acl
+
+server_logic_name
