@@ -1,8 +1,13 @@
-ip_front: "*"
-port_front: 80
-mode_front: http
+defaults:
+  - log: global
+  - mode: http 
+  - timeout_server: 30000
 
-acls:
+
+frontend:
+  - ip_front: "*"
+  - port_front: 80
+  - mode_front: http
 # acl for apache
   - acl: asite1_acl hdr_dom(host) -i www.mysite1.org
     usebackend: site1-backend if asite1_acl
@@ -16,4 +21,32 @@ acls:
   - acl: instance2_acl path_dir -i /sample
     usebackend: tomcat2-backend if instance2_acl
 
-server_logic_name
+backends:
+# Tomcat server 
+  - name: tomcat1-backend
+    algorithme: roundrobin
+    server_name: tomcat1
+    ip: 172.16.15.13
+    port: 8042
+  - name: tomcat2-backend
+    algorithme: roundrobin
+    server_name: tomcat2
+    ip: 172.16.15.61
+    port: 8080
+# apache server
+  - name: site1-backend
+    algorithme: roundrobin
+    server_name: site1
+    ip: 172.16.15.13
+    port: 80
+  - name: site2-backend
+    algorithme: roundrobin
+    server_name: site2
+    ip: 172.16.15.13
+    port: 88
+  - name: site3-backend
+    algorithme: roundrobin
+    server_name: site2
+    ip: 172.16.15.13
+    port: 82
+

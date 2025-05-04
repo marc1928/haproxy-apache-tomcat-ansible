@@ -1,2 +1,14 @@
 ---
-- name: instal
+- name: installation de haproxy 
+  package: 
+    name: haproxy
+    state: present 
+    update_cache: yes 
+  tags: install
+
+- name: Configuration de haproxy 
+  template:
+    src: template/haproxy.cfg.j2
+    dest: /etc/haproxy/haproxy.cfg
+  notify: redemarrer haproxy
+  tags: config

@@ -2,12 +2,13 @@ all:
   children:
     tomcat:
       hosts:
-        debian.cible1:   
+        vm.cible1:
+        vm.local:   
 
     haproxy: 
       hosts:
-        haproxy: 
+        vm.haproxy: 
 
-    local:
+    apache:
       hosts:
-        localhost:
+        vm.local:

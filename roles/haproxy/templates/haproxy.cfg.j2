@@ -18,13 +18,13 @@ global
         ssl-default-bind-options ssl-min-ver TLSv1.2 no-tls-tickets
 
 defaults
-        log     global
-        mode    http
+        log     {{ defaults.log }}
+        mode    {{ defaults.mode }}
         option  httplog
         option  dontlognull
         timeout connect 5000
         timeout client  50000
-        timeout server  30000
+        timeout server  {{ defaults.timeout_server }}
         errorfile 400 /etc/haproxy/errors/400.http
         errorfile 403 /etc/haproxy/errors/403.http
         errorfile 408 /etc/haproxy/errors/408.http
@@ -34,8 +34,8 @@ defaults
         errorfile 504 /etc/haproxy/errors/504.http
 
 frontend tomcat-frontend
-        bind {{ ip_front }}:{{ port_front }}
-        mode {{ mode_front }}
+        bind {{ frontend.ip_front }}:{{ frontend.port_front }}
+        mode {{ frontend.mode_front }}
 
         {% for item int acls %}
         acl {{ item.acl }}
@@ -43,24 +43,13 @@ frontend tomcat-frontend
 
         {% endfor %}
 
+{% for item in backends %}
+backend {{ item.name }}
+        balance {{ item.roundrobin }}
+        server {{ item.server_name }} {{ item.ip }}:{{ item.port }} check
 
-backend tomcat1-backend
-        #balance roundrobin
-        server tomcat1 172.16.15.13:8042 check
-        #server tomcat02 172.16.15.61:8080 check
+{% endfor %}
 
-backend tomcat2-backend
-        #balance roundrobin
-        server  tomcat2 172.16.15.61:8080 check
-
-backend site1-backend
-        server site1 172.16.15.13:80 check
-
-backend site2-backend
-        server site2 172.16.15.13:88 check
-
-backend site3-backend
-        server site3 172.16.15.13:82 check
 
 
 listen stat

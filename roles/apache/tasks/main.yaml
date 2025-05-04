@@ -1,5 +1,12 @@
 ---
 # Creation des siten web
+
+- name: S'assurer qu'Apache est installé
+  package:
+    name: apache2
+    state: present
+  tags: install, apache
+
 - name: Création des répertoires pour les sites web 
   file: 
     name: "/var/www/{{ item.directory }}"
@@ -25,7 +32,7 @@
 - name: Configuration de chaque site 
   template:
     src: templates/mysite.conf.j2
-    dest: "/etc/apache2/sites-available/{{ item.confname }}.conf"
+    dest: "/etc/apache2/sites-available/{{ item.config }}"
   loop: "{{ site }}"
   tags: config, website 
 
@@ -35,4 +42,14 @@
     dest: /etc/apache2/ports.conf
   tags: manage, ports 
 
-#- name: activer les sites
+- name: Recharger systemd 
+  systemd:
+    daemon_reload: yes
+  notify: Redémarrer Apache
+
+- name: Activer les sites Apache
+  command: "a2ensite {{ item.config }}"
+  loop: "{{ site }}"
+
+- name: Activer les sites Apache
+  command: "systemctl reload apache2"

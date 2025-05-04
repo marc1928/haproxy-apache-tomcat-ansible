@@ -1,12 +1,26 @@
 ---
-- name: Configuration de apache, tomcat et de haproxy 
-  hosts: tomcat
+- name: Installation, configuration de apache et déploiement des sites
+  hosts: apache
   become: true
 
   roles:
     - role: apache
-      tags: ['apache','webserver'] 
+      tags: apache,webserver 
+    
+
+- name: installation, configuration tomcat et déploiement d'application
+  hosts: tomcat
+  become: true
+
+  roles:
     - role: tomcat 
-      tags: ['tomcat','appserver'] 
+      tags: tomcat, appserver
+
+
+- name: Installation et configuration de haproxy 
+  hosts: haproxy
+  become: true
+
+  roles: 
     - role: haproxy 
-      tags: ['haproxy', 'loadbalancer']                      
+      tags: haproxy, loadbalance

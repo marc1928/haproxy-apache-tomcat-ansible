@@ -8,8 +8,8 @@ site:
     h1_balise: Mon site 1
     errorlog: /var/www/site1/logs/error.log
     customlog: /var/www/site1/logs/access.log
-    confname: mysite1
-    loglevel: war
+    config: mysite1.conf
+    loglevel: warn
 
   - name: site2  
     port: 88
@@ -19,8 +19,8 @@ site:
     h1_balise: Mon site2
     errorlog: /var/www/site2/logs/error.log
     customlog: /var/www/site2/logs/access.log
-    confname: mysite2
-    loglevel: war
+    config: mysite2.conf
+    loglevel: warn
 
   - name: site3 
     port: 82 
@@ -30,8 +30,8 @@ site:
     h1_balise: Mon site 3
     errorlog: /var/www/site3/logs/error.log
     customlog: /var/www/site3/logs/access.log
-    confname: mysite3
-    loglevel: war    
+    config: mysite3.conf
+    loglevel: warn    
 
 # Variable pour le fichier de configuartion des ports 
 listen_ports:
