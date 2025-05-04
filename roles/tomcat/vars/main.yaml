@@ -2,12 +2,13 @@
 java_package: "openjdk-17-jdk"
 
 # Tomcat package
-tomcat_package:
-  - version: 9.0.104
-  - archive: "apache-tomcat-9.0.104.tar.gz"
-  - archive_url: "https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.104/bin/{{ tomcat_archive }}"
+version: 9.0.104
+archive: "apache-tomcat-9.0.104.tar.gz"
+archive_url: "https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.104/bin/{{ archive }}"
 
-
+bin_scripts:
+  - "{{ home }}/bin/startup.sh"
+  - "{{ home }}/bin/shutdown.sh"
 
 
 

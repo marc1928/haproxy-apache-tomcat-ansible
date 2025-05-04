@@ -1,15 +1,14 @@
 ansible_connection: local
 
 # User dédié pour le service Tomcat
-user_linux:
-  - group: tomcat
-  - user: tomcat
-  - home: /opt/{{ user_linux.user }}
-  - shell: /bin/false
+group: "tomcat"
+user: "tomcat"
+home: "/opt/{{ user }}"
+shell: /bin/false
 
-extract_path: "{{ user_linux.home }}"
+extract_path: "{{ home }}"
 # Tomcat service
-service_name: tomcat
+service_name: "tomcat"
 service_file: "/etc/systemd/system/{{ service_name }}.service"
 java_home: "/usr/lib/jvm/default-java"
 
@@ -18,5 +17,5 @@ shutdown_port: 8020
 http_port: 8042
 
 # application .war file 
-war_file_src: myapp2.war
-war_file_dest: "{{ user_linux.home }}/webapps/{{ war_file_src }}"
+war_file_src: "myapp2.war"
+war_file_dest: "{{ home }}/webapps/{{ war_file_src }}"

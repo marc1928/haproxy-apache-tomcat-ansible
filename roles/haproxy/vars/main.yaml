@@ -1,14 +1,15 @@
 defaults:
-  - log: global
-  - mode: http 
-  - timeout_server: 30000
+  log: global
+  mode: http 
+  timeout_server: 30000
 
 
 frontend:
-  - ip_front: "*"
-  - port_front: 80
-  - mode_front: http
+  ip_front: "*"
+  port_front: 80
+  mode_front: http
 # acl for apache
+acls:
   - acl: asite1_acl hdr_dom(host) -i www.mysite1.org
     usebackend: site1-backend if asite1_acl
   - acl: asite2_acl hdr_dom(host) -i www.mysite2.org

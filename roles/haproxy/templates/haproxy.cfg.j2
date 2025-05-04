@@ -37,7 +37,7 @@ frontend tomcat-frontend
         bind {{ frontend.ip_front }}:{{ frontend.port_front }}
         mode {{ frontend.mode_front }}
 
-        {% for item int acls %}
+        {% for item in acls %}
         acl {{ item.acl }}
         use_backend {{ item.usebackend }}
 
@@ -45,7 +45,7 @@ frontend tomcat-frontend
 
 {% for item in backends %}
 backend {{ item.name }}
-        balance {{ item.roundrobin }}
+        balance {{ item.algorithme }}
         server {{ item.server_name }} {{ item.ip }}:{{ item.port }} check
 
 {% endfor %}

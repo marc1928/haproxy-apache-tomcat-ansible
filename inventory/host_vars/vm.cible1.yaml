@@ -1,11 +1,10 @@
 # User dédié pour le service Tomcat
-user_linux:
-  - group: tomcat2
-  - user: tomcat2 
-  - home: /opt/{{ user_linux.user }}
-  - shell: /bin/false
+group: "tomcat2"
+user: "tomcat2"
+home: "/opt/{{ user }}"
+shell: /bin/false
 
-extract_path: "{{ user_linux.home }}"
+extract_path: "{{ home }}"
 
 # Tomcat service
 service_name: tomcat
@@ -17,5 +16,5 @@ shutdown_port: 8005
 http_port: 8080
 
 # application .war file 
-war_file_src: myapp1.war
-war_file_dest: "{{ user_linux.home }}/webapps/{{ war_file_src }}"
+war_file_src: "myapp1.war"
+war_file_dest: "{{ home }}/webapps/{{ war_file_src }}"

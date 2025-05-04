@@ -8,40 +8,40 @@
 
 - name: Création du groupe Tomcat
   group:
-    name: "{{ tomcat_group }}"
+    name: "{{ group }}"
   tags: tomcat_installation, group, user
 
 - name: Création de l'utilisateur Tomcat
   user:
-    name: "{{ user_linux.user }}"
-    home: "{{ user_linux.user }}"
+    name: "{{ user }}"
+    home: "{{ home }}"
     create_home: yes
-    shell: false
-    group: "{{ user_linux.group }}"
+    shell: "{{ shell }}"
+    group: "{{ group }}"
   tags: tomcat_installation, user
 
 - name: Télécharger l'archive Tomcat
   get_url:
-    url: "{{ tomcat_package.archive_url }}"
+    url: "{{ archive_url }}"
     dest: "/tmp/"
     mode: '0644'
   tags: tomcat_installation, tomcat
 
 - name: Décompresser l'archive Tomcat
   unarchive:
-    src: "/tmp/{{ tomcat_package.archive }}"
-    dest: "{{ tomcat_package.extract_path }}"
+    src: "/tmp/{{ archive }}"
+    dest: "{{ extract_path }}"
     remote_src: yes
     extra_opts: [--strip-components=1]
   tags: tomcat_installation, tomcat
 
 - name: rendre l'utilisateur propriétaire du répertoire tomcat
   file:
-    path: "{{ user_linux.home }}"
+    path: "{{ home }}"
     state: directory
     recurse: yes
-    owner: "{{ user_linux.user }}"
-    group: "{{ user_linux.group }}"
+    owner: "{{ user }}"
+    group: "{{ group }}"
   tags: tomcat_installation
 
 - name: Rendre exécutables les scripts du dossier bin
@@ -70,14 +70,14 @@
 
 - name: Activer Tomcat au démarrage
   systemd:
-    name: "{{ tomcat_service_name }}"
+    name: "{{ service_name }}"
     enabled: yes
   tags: service, enable
 
 - name: Configuration de server.xml
   template:
     src: templates/server.xml.j2
-    dest: "{{ tomcat_home }}/conf/server.xml"
+    dest: "{{ home }}/conf/server.xml"
   tags: config, server
 
 - name: Supprimer l'ancien WAR s'il existe
@@ -90,8 +90,8 @@
   copy:
     src: "files/{{ war_file_src }}"
     dest: "{{ war_file_dest }}"
-    owner: "{{ tomcat_user }}"
-    group: "{{ tomcat_group }}"
+    owner: "{{ user }}"
+    group: "{{ group }}"
     mode: '0644'
   tags: deploy, war
     

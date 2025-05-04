@@ -4,15 +4,15 @@ After=network.target
 
 [Service]
 Type=forking
-User={{ tomcat_user }}
-Group={{ tomcat_user }}
+User={{ user }}
+Group={{ user }}
 Environment="JAVA_HOME={{ java_home }}"
 Environment="JAVA_OPTS=-Djava.security.egd=file:///dev/urandom"
-Environment="CATALINA_BASE={{ tomcat_home }}"
-Environment="CATALINA_HOME={{ tomcat_home }}"
-Environment="CATALINA_PID={{ tomcat_home }}/temp/tomcat.pid"
-ExecStart={{ tomcat_home }}/bin/startup.sh
-ExecStop={{ tomcat_home }}/bin/shutdown.sh
+Environment="CATALINA_BASE={{ home }}"
+Environment="CATALINA_HOME={{ home }}"
+Environment="CATALINA_PID={{ home }}/temp/tomcat.pid"
+ExecStart={{ home }}/bin/startup.sh
+ExecStop={{ home }}/bin/shutdown.sh
 
 [Install]
 WantedBy=multi-user.target
